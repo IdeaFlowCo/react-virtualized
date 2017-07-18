@@ -128,10 +128,15 @@ export default class CellMeasurer extends React.PureComponent {
 
     const {height, width} = this._getCellMeasurements();
 
-    if (
-      height !== cache.getHeight(rowIndex, columnIndex) ||
-      width !== cache.getWidth(rowIndex, columnIndex)
-    ) {
+    const heightChanged =
+      !cache.hasFixedHeight() &&
+      height !== cache.getHeight(rowIndex, columnIndex);
+
+    const widthChanged =
+      !cache.hasFixedWidth() &&
+      width !== cache.getWidth(rowIndex, columnIndex);
+
+    if (heightChanged || widthChanged) {
       cache.set(rowIndex, columnIndex, width, height);
 
       if (parent && typeof parent.recomputeGridSize === 'function') {
