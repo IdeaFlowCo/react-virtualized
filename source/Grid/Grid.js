@@ -764,6 +764,10 @@ export default class Grid extends React.PureComponent<Props, State> {
       nextProps.rowHeight !== this.props.rowHeight
     ) {
       this._styleCache = {};
+
+      // Reset the cache of position managers
+      this._columnSizeAndPositionManager.resetCell(0);
+      this._rowSizeAndPositionManager.resetCell(0);
     }
 
     this._columnWidthGetter = this._wrapSizeGetter(nextProps.columnWidth);
