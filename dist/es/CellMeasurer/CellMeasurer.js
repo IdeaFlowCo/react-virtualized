@@ -5,7 +5,6 @@ import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructo
 import _inherits from 'babel-runtime/helpers/inherits';
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
-import CellMeasurerCache from './CellMeasurerCache.js';
 
 /**
  * Wraps a cell and measures its rendered content.
@@ -154,17 +153,21 @@ var CellMeasurer = function (_React$PureComponent) {
 
 CellMeasurer.__internalCellMeasurerFlag = false;
 CellMeasurer.propTypes = process.env.NODE_ENV === 'production' ? null : {
-  cache: typeof CellMeasurerCache === 'function' ? require('prop-types').instanceOf(CellMeasurerCache).isRequired : require('prop-types').any.isRequired,
-  children: require('prop-types').oneOfType([require('prop-types').func, require('prop-types').node]).isRequired,
-  columnIndex: require('prop-types').number,
-  index: require('prop-types').number,
-  parent: require('prop-types').shape({
-    invalidateCellSizeAfterRender: require('prop-types').func,
-    recomputeGridSize: require('prop-types').func
+  cache: function cache() {
+    return (typeof bpfrpt_proptype_CellMeasureCache === 'function' ? bpfrpt_proptype_CellMeasureCache.isRequired ? bpfrpt_proptype_CellMeasureCache.isRequired : bpfrpt_proptype_CellMeasureCache : PropTypes.shape(bpfrpt_proptype_CellMeasureCache).isRequired).apply(this, arguments);
+  },
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
+  columnIndex: PropTypes.number,
+  index: PropTypes.number,
+  parent: PropTypes.shape({
+    invalidateCellSizeAfterRender: PropTypes.func,
+    recomputeGridSize: PropTypes.func
   }).isRequired,
-  rowIndex: require('prop-types').number
+  rowIndex: PropTypes.number
 };
 export default CellMeasurer;
 if (process.env.NODE_ENV !== 'production') {
   CellMeasurer.__internalCellMeasurerFlag = true;
 }
+import { bpfrpt_proptype_CellMeasureCache } from './types';
+import PropTypes from 'prop-types';

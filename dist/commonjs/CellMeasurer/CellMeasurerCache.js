@@ -13,9 +13,12 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _types = require('./types');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DEFAULT_HEIGHT = exports.DEFAULT_HEIGHT = 30;
+
 var DEFAULT_WIDTH = exports.DEFAULT_WIDTH = 100;
 
 // Enables more intelligent mapping of a given column and row index to an item ID.

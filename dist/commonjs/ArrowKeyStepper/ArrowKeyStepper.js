@@ -30,15 +30,17 @@ var React = _interopRequireWildcard(_react);
 
 var _reactLifecyclesCompat = require('react-lifecycles-compat');
 
-var _reactLifecyclesCompat2 = _interopRequireDefault(_reactLifecyclesCompat);
+var _Grid = require('../Grid');
+
+var _types = require('./types');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var babelPluginFlowReactPropTypes_proptype_RenderedSection = require('../Grid').babelPluginFlowReactPropTypes_proptype_RenderedSection || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_ScrollIndices = require('./types').babelPluginFlowReactPropTypes_proptype_ScrollIndices || require('prop-types').any;
 
 /**
  * This HOC decorates a virtualized component and responds to arrow-key events by scrolling one row or column at a time.
@@ -201,19 +203,19 @@ ArrowKeyStepper.defaultProps = {
   scrollToRow: 0
 };
 ArrowKeyStepper.propTypes = process.env.NODE_ENV === 'production' ? null : {
-  children: require('prop-types').func.isRequired,
-  className: require('prop-types').string,
-  columnCount: require('prop-types').number.isRequired,
-  disabled: require('prop-types').bool.isRequired,
-  isControlled: require('prop-types').bool.isRequired,
-  mode: require('prop-types').oneOf(['cells', 'edges']).isRequired,
-  onScrollToChange: require('prop-types').func,
-  rowCount: require('prop-types').number.isRequired,
-  scrollToColumn: require('prop-types').number.isRequired,
-  scrollToRow: require('prop-types').number.isRequired
+  children: _propTypes2.default.func.isRequired,
+  className: _propTypes2.default.string,
+  columnCount: _propTypes2.default.number.isRequired,
+  disabled: _propTypes2.default.bool.isRequired,
+  isControlled: _propTypes2.default.bool.isRequired,
+  mode: _propTypes2.default.oneOf(['cells', 'edges']).isRequired,
+  onScrollToChange: _propTypes2.default.func,
+  rowCount: _propTypes2.default.number.isRequired,
+  scrollToColumn: _propTypes2.default.number.isRequired,
+  scrollToRow: _propTypes2.default.number.isRequired
 };
 
 
-(0, _reactLifecyclesCompat2.default)(ArrowKeyStepper);
+(0, _reactLifecyclesCompat.polyfill)(ArrowKeyStepper);
 
 exports.default = ArrowKeyStepper;

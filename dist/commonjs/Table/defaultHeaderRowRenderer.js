@@ -9,9 +9,15 @@ var _react = require('react');
 
 var React = _interopRequireWildcard(_react);
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _types = require('./types');
 
-var babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams = require('./types').babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams || require('prop-types').any;
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function defaultHeaderRowRenderer(_ref) {
   var className = _ref.className,
@@ -24,4 +30,4 @@ function defaultHeaderRowRenderer(_ref) {
     columns
   );
 }
-defaultHeaderRowRenderer.propTypes = process.env.NODE_ENV === 'production' ? null : babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams;
+defaultHeaderRowRenderer.propTypes = process.env.NODE_ENV === 'production' ? null : _types.bpfrpt_proptype_HeaderRowRendererParams === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_HeaderRowRendererParams;

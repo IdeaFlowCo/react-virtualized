@@ -42,8 +42,6 @@ var React = _interopRequireWildcard(_react);
 
 var _reactLifecyclesCompat = require('react-lifecycles-compat');
 
-var _reactLifecyclesCompat2 = _interopRequireDefault(_reactLifecyclesCompat);
-
 var _CellMeasurerCacheDecorator = require('./CellMeasurerCacheDecorator');
 
 var _CellMeasurerCacheDecorator2 = _interopRequireDefault(_CellMeasurerCacheDecorator);
@@ -475,7 +473,8 @@ var MultiGrid = function (_React$PureComponent) {
       var enableFixedColumnScroll = props.enableFixedColumnScroll,
           fixedColumnCount = props.fixedColumnCount,
           fixedRowCount = props.fixedRowCount,
-          rowCount = props.rowCount;
+          rowCount = props.rowCount,
+          hideBottomLeftGridScrollbar = props.hideBottomLeftGridScrollbar;
       var showVerticalScrollbar = this.state.showVerticalScrollbar;
 
 
@@ -483,22 +482,41 @@ var MultiGrid = function (_React$PureComponent) {
         return null;
       }
 
-      var additionalRowCount = showVerticalScrollbar ? 1 : 0;
+      var additionalRowCount = showVerticalScrollbar ? 1 : 0,
+          height = this._getBottomGridHeight(props),
+          width = this._getLeftGridWidth(props),
+          scrollbarSize = this.state.showVerticalScrollbar ? this.state.scrollbarSize : 0,
+          gridWidth = hideBottomLeftGridScrollbar ? width + scrollbarSize : width;
 
-      return React.createElement(_Grid2.default, (0, _extends3.default)({}, props, {
+      var bottomLeftGrid = React.createElement(_Grid2.default, (0, _extends3.default)({}, props, {
         cellRenderer: this._cellRendererBottomLeftGrid,
         className: this.props.classNameBottomLeftGrid,
         columnCount: fixedColumnCount,
         deferredMeasurementCache: this._deferredMeasurementCacheBottomLeftGrid,
-        height: this._getBottomGridHeight(props),
+        height: height,
         onScroll: enableFixedColumnScroll ? this._onScrollTop : undefined,
         ref: this._bottomLeftGridRef,
         rowCount: Math.max(0, rowCount - fixedRowCount) + additionalRowCount,
         rowHeight: this._rowHeightBottomGrid,
         style: this._bottomLeftGridStyle,
         tabIndex: null,
-        width: this._getLeftGridWidth(props)
+        width: gridWidth
       }));
+
+      if (hideBottomLeftGridScrollbar) {
+        return React.createElement(
+          'div',
+          {
+            className: 'BottomLeftGrid_ScrollWrapper',
+            style: (0, _extends3.default)({}, this._bottomLeftGridStyle, {
+              height: height,
+              width: width,
+              overflowY: 'hidden'
+            }) },
+          bottomLeftGrid
+        );
+      }
+      return bottomLeftGrid;
     }
   }, {
     key: '_renderBottomRightGrid',
@@ -558,31 +576,62 @@ var MultiGrid = function (_React$PureComponent) {
           enableFixedRowScroll = props.enableFixedRowScroll,
           fixedColumnCount = props.fixedColumnCount,
           fixedRowCount = props.fixedRowCount,
-          scrollLeft = props.scrollLeft;
-      var showHorizontalScrollbar = this.state.showHorizontalScrollbar;
+          scrollLeft = props.scrollLeft,
+          hideTopRightGridScrollbar = props.hideTopRightGridScrollbar;
+      var _state2 = this.state,
+          showHorizontalScrollbar = _state2.showHorizontalScrollbar,
+          scrollbarSize = _state2.scrollbarSize;
 
 
       if (!fixedRowCount) {
         return null;
       }
 
-      var additionalColumnCount = showHorizontalScrollbar ? 1 : 0;
+      var additionalColumnCount = showHorizontalScrollbar ? 1 : 0,
+          height = this._getTopGridHeight(props),
+          width = this._getRightGridWidth(props),
+          additionalHeight = showHorizontalScrollbar ? scrollbarSize : 0;
 
-      return React.createElement(_Grid2.default, (0, _extends3.default)({}, props, {
+      var gridHeight = height,
+          style = this._topRightGridStyle;
+
+      if (hideTopRightGridScrollbar) {
+        gridHeight = height + additionalHeight;
+        style = (0, _extends3.default)({}, this._topRightGridStyle, {
+          left: 0
+        });
+      }
+
+      var topRightGrid = React.createElement(_Grid2.default, (0, _extends3.default)({}, props, {
         cellRenderer: this._cellRendererTopRightGrid,
         className: this.props.classNameTopRightGrid,
         columnCount: Math.max(0, columnCount - fixedColumnCount) + additionalColumnCount,
         columnWidth: this._columnWidthRightGrid,
         deferredMeasurementCache: this._deferredMeasurementCacheTopRightGrid,
-        height: this._getTopGridHeight(props),
+        height: gridHeight,
         onScroll: enableFixedRowScroll ? this._onScrollLeft : undefined,
         ref: this._topRightGridRef,
         rowCount: fixedRowCount,
         scrollLeft: scrollLeft,
-        style: this._topRightGridStyle,
+        style: style,
         tabIndex: null,
-        width: this._getRightGridWidth(props)
+        width: width
       }));
+
+      if (hideTopRightGridScrollbar) {
+        return React.createElement(
+          'div',
+          {
+            className: 'TopRightGrid_ScrollWrapper',
+            style: (0, _extends3.default)({}, this._topRightGridStyle, {
+              height: height,
+              width: width,
+              overflowX: 'hidden'
+            }) },
+          topRightGrid
+        );
+      }
+      return topRightGrid;
     }
   }], [{
     key: 'getDerivedStateFromProps',
@@ -615,7 +664,9 @@ MultiGrid.defaultProps = {
   styleBottomLeftGrid: {},
   styleBottomRightGrid: {},
   styleTopLeftGrid: {},
-  styleTopRightGrid: {}
+  styleTopRightGrid: {},
+  hideTopRightGridScrollbar: false,
+  hideBottomLeftGridScrollbar: false
 };
 
 var _initialiseProps = function _initialiseProps() {
@@ -710,9 +761,9 @@ var _initialiseProps = function _initialiseProps() {
         columnCount = _props8.columnCount,
         fixedColumnCount = _props8.fixedColumnCount,
         columnWidth = _props8.columnWidth;
-    var _state2 = _this2.state,
-        scrollbarSize = _state2.scrollbarSize,
-        showHorizontalScrollbar = _state2.showHorizontalScrollbar;
+    var _state3 = _this2.state,
+        scrollbarSize = _state3.scrollbarSize,
+        showHorizontalScrollbar = _state3.showHorizontalScrollbar;
 
     // An extra cell is added to the count
     // This gives the smaller Grid extra room for offset,
@@ -744,9 +795,9 @@ var _initialiseProps = function _initialiseProps() {
     var horizontal = _ref7.horizontal,
         size = _ref7.size,
         vertical = _ref7.vertical;
-    var _state3 = _this2.state,
-        showHorizontalScrollbar = _state3.showHorizontalScrollbar,
-        showVerticalScrollbar = _state3.showVerticalScrollbar;
+    var _state4 = _this2.state,
+        showHorizontalScrollbar = _state4.showHorizontalScrollbar,
+        showVerticalScrollbar = _state4.showVerticalScrollbar;
 
 
     if (horizontal !== showHorizontalScrollbar || vertical !== showVerticalScrollbar) {
@@ -792,9 +843,9 @@ var _initialiseProps = function _initialiseProps() {
         fixedRowCount = _props9.fixedRowCount,
         rowCount = _props9.rowCount,
         rowHeight = _props9.rowHeight;
-    var _state4 = _this2.state,
-        scrollbarSize = _state4.scrollbarSize,
-        showVerticalScrollbar = _state4.showVerticalScrollbar;
+    var _state5 = _this2.state,
+        scrollbarSize = _state5.scrollbarSize,
+        showVerticalScrollbar = _state5.showVerticalScrollbar;
 
     // An extra cell is added to the count
     // This gives the smaller Grid extra room for offset,
@@ -831,10 +882,12 @@ MultiGrid.propTypes = process.env.NODE_ENV !== "production" ? {
   styleBottomLeftGrid: _propTypes2.default.object.isRequired,
   styleBottomRightGrid: _propTypes2.default.object.isRequired,
   styleTopLeftGrid: _propTypes2.default.object.isRequired,
-  styleTopRightGrid: _propTypes2.default.object.isRequired
+  styleTopRightGrid: _propTypes2.default.object.isRequired,
+  hideTopRightGridScrollbar: _propTypes2.default.bool,
+  hideBottomLeftGridScrollbar: _propTypes2.default.bool
 } : {};
 
 
-(0, _reactLifecyclesCompat2.default)(MultiGrid);
+(0, _reactLifecyclesCompat.polyfill)(MultiGrid);
 
 exports.default = MultiGrid;

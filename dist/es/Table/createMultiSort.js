@@ -1,3 +1,4 @@
+import _Object$keys from 'babel-runtime/core-js/object/keys';
 
 
 export default function createMultiSort(sortCallback) {
@@ -38,9 +39,18 @@ export default function createMultiSort(sortCallback) {
         delete sortDirection[dataKey];
       }
     } else {
+      // Clear sortBy array of all non-selected keys
       sortBy.length = 0;
       sortBy.push(dataKey);
 
+      // Clear sortDirection object of all non-selected keys
+      var sortDirectionKeys = _Object$keys(sortDirection);
+      sortDirectionKeys.forEach(function (key) {
+        if (key !== dataKey) delete sortDirection[key];
+      });
+
+      // If key is already selected, reverse sort direction.
+      // Else, set sort direction to default direction.
       if (sortDirection.hasOwnProperty(dataKey)) {
         sortDirection[dataKey] = sortDirection[dataKey] === 'ASC' ? 'DESC' : 'ASC';
       } else {

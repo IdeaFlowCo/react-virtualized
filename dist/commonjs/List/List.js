@@ -44,31 +44,15 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _types = require('./types');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var babelPluginFlowReactPropTypes_proptype_Scroll = require('../Grid').babelPluginFlowReactPropTypes_proptype_Scroll || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_CellRendererParams = require('../Grid').babelPluginFlowReactPropTypes_proptype_CellRendererParams || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_RenderedSection = require('../Grid').babelPluginFlowReactPropTypes_proptype_RenderedSection || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter = require('../Grid').babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_CellPosition = require('../Grid').babelPluginFlowReactPropTypes_proptype_CellPosition || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_CellSize = require('../Grid').babelPluginFlowReactPropTypes_proptype_CellSize || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_Alignment = require('../Grid').babelPluginFlowReactPropTypes_proptype_Alignment || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_NoContentRenderer = require('../Grid').babelPluginFlowReactPropTypes_proptype_NoContentRenderer || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_Scroll = require('./types').babelPluginFlowReactPropTypes_proptype_Scroll || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_RenderedRows = require('./types').babelPluginFlowReactPropTypes_proptype_RenderedRows || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_RowRenderer = require('./types').babelPluginFlowReactPropTypes_proptype_RowRenderer || require('prop-types').any;
 
 /**
  * It is inefficient to create and manage a large list of DOM elements within a scrolling container
@@ -311,91 +295,101 @@ List.defaultProps = {
   style: {}
 };
 List.propTypes = process.env.NODE_ENV === 'production' ? null : {
-  "aria-label": require('prop-types').string,
+  "aria-label": _propTypes2.default.string,
 
 
   /**
    * Removes fixed height from the scrollingContainer so that the total height
    * of rows can stretch the window. Intended for use with WindowScroller
    */
-  autoHeight: require('prop-types').bool.isRequired,
+  autoHeight: _propTypes2.default.bool.isRequired,
 
 
   /** Optional CSS class name */
-  className: require('prop-types').string,
+  className: _propTypes2.default.string,
 
 
   /**
    * Used to estimate the total height of a List before all of its rows have actually been measured.
    * The estimated total height is adjusted as rows are rendered.
    */
-  estimatedRowSize: require('prop-types').number.isRequired,
+  estimatedRowSize: _propTypes2.default.number.isRequired,
 
 
   /** Height constraint for list (determines how many actual rows are rendered) */
-  height: require('prop-types').number.isRequired,
+  height: _propTypes2.default.number.isRequired,
 
 
   /** Optional renderer to be used in place of rows when rowCount is 0 */
-  noRowsRenderer: typeof babelPluginFlowReactPropTypes_proptype_NoContentRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_NoContentRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_NoContentRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_NoContentRenderer : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_NoContentRenderer).isRequired,
+  noRowsRenderer: function noRowsRenderer() {
+    return (typeof _Grid.bpfrpt_proptype_NoContentRenderer === 'function' ? _Grid.bpfrpt_proptype_NoContentRenderer.isRequired ? _Grid.bpfrpt_proptype_NoContentRenderer.isRequired : _Grid.bpfrpt_proptype_NoContentRenderer : _propTypes2.default.shape(_Grid.bpfrpt_proptype_NoContentRenderer).isRequired).apply(this, arguments);
+  },
 
 
   /** Callback invoked with information about the slice of rows that were just rendered.  */
 
-  onRowsRendered: require('prop-types').func.isRequired,
+  onRowsRendered: _propTypes2.default.func.isRequired,
 
 
   /**
    * Callback invoked whenever the scroll offset changes within the inner scrollable region.
    * This callback can be used to sync scrolling between lists, tables, or grids.
    */
-  onScroll: require('prop-types').func.isRequired,
+  onScroll: _propTypes2.default.func.isRequired,
 
 
   /** See Grid#overscanIndicesGetter */
-  overscanIndicesGetter: typeof babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter === 'function' ? babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter.isRequired ? babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter.isRequired : babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter).isRequired,
+  overscanIndicesGetter: function overscanIndicesGetter() {
+    return (typeof _Grid.bpfrpt_proptype_OverscanIndicesGetter === 'function' ? _Grid.bpfrpt_proptype_OverscanIndicesGetter.isRequired ? _Grid.bpfrpt_proptype_OverscanIndicesGetter.isRequired : _Grid.bpfrpt_proptype_OverscanIndicesGetter : _propTypes2.default.shape(_Grid.bpfrpt_proptype_OverscanIndicesGetter).isRequired).apply(this, arguments);
+  },
 
 
   /**
    * Number of rows to render above/below the visible bounds of the list.
    * These rows can help for smoother scrolling on touch devices.
    */
-  overscanRowCount: require('prop-types').number.isRequired,
+  overscanRowCount: _propTypes2.default.number.isRequired,
 
 
   /** Either a fixed row height (number) or a function that returns the height of a row given its index.  */
-  rowHeight: typeof babelPluginFlowReactPropTypes_proptype_CellSize === 'function' ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired : babelPluginFlowReactPropTypes_proptype_CellSize : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_CellSize).isRequired,
+  rowHeight: function rowHeight() {
+    return (typeof _Grid.bpfrpt_proptype_CellSize === 'function' ? _Grid.bpfrpt_proptype_CellSize.isRequired ? _Grid.bpfrpt_proptype_CellSize.isRequired : _Grid.bpfrpt_proptype_CellSize : _propTypes2.default.shape(_Grid.bpfrpt_proptype_CellSize).isRequired).apply(this, arguments);
+  },
 
 
   /** Responsible for rendering a row given an index; ({ index: number }): node */
-  rowRenderer: typeof babelPluginFlowReactPropTypes_proptype_RowRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_RowRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_RowRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_RowRenderer : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_RowRenderer).isRequired,
+  rowRenderer: function rowRenderer() {
+    return (typeof _types.bpfrpt_proptype_RowRenderer === 'function' ? _types.bpfrpt_proptype_RowRenderer.isRequired ? _types.bpfrpt_proptype_RowRenderer.isRequired : _types.bpfrpt_proptype_RowRenderer : _propTypes2.default.shape(_types.bpfrpt_proptype_RowRenderer).isRequired).apply(this, arguments);
+  },
 
 
   /** Number of rows in list. */
-  rowCount: require('prop-types').number.isRequired,
+  rowCount: _propTypes2.default.number.isRequired,
 
 
   /** See Grid#scrollToAlignment */
-  scrollToAlignment: typeof babelPluginFlowReactPropTypes_proptype_Alignment === 'function' ? babelPluginFlowReactPropTypes_proptype_Alignment.isRequired ? babelPluginFlowReactPropTypes_proptype_Alignment.isRequired : babelPluginFlowReactPropTypes_proptype_Alignment : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_Alignment).isRequired,
+  scrollToAlignment: function scrollToAlignment() {
+    return (typeof _Grid.bpfrpt_proptype_Alignment === 'function' ? _Grid.bpfrpt_proptype_Alignment.isRequired ? _Grid.bpfrpt_proptype_Alignment.isRequired : _Grid.bpfrpt_proptype_Alignment : _propTypes2.default.shape(_Grid.bpfrpt_proptype_Alignment).isRequired).apply(this, arguments);
+  },
 
 
   /** Row index to ensure visible (by forcefully scrolling if necessary) */
-  scrollToIndex: require('prop-types').number.isRequired,
+  scrollToIndex: _propTypes2.default.number.isRequired,
 
 
   /** Vertical offset. */
-  scrollTop: require('prop-types').number,
+  scrollTop: _propTypes2.default.number,
 
 
   /** Optional inline style */
-  style: require('prop-types').object.isRequired,
+  style: _propTypes2.default.object.isRequired,
 
 
   /** Tab index for focus */
-  tabIndex: require('prop-types').number,
+  tabIndex: _propTypes2.default.number,
 
 
   /** Width of list */
-  width: require('prop-types').number.isRequired
+  width: _propTypes2.default.number.isRequired
 };
 exports.default = List;

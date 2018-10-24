@@ -52,6 +52,8 @@ var _getUpdatedOffsetForIndex = require('../utils/getUpdatedOffsetForIndex');
 
 var _getUpdatedOffsetForIndex2 = _interopRequireDefault(_getUpdatedOffsetForIndex);
 
+var _types = require('./types');
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -60,10 +62,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Renders scattered or non-linear data.
  * Unlike Grid, which renders checkerboard data, Collection can render arbitrarily positioned- even overlapping- data.
  */
-var babelPluginFlowReactPropTypes_proptype_SizeInfo = require('./types').babelPluginFlowReactPropTypes_proptype_SizeInfo || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_ScrollPosition = require('./types').babelPluginFlowReactPropTypes_proptype_ScrollPosition || require('prop-types').any;
-
 var Collection = function (_React$PureComponent) {
   (0, _inherits3.default)(Collection, _React$PureComponent);
 

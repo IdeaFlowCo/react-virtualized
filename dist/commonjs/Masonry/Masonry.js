@@ -3,11 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DEFAULT_SCROLLING_RESET_TIME_INTERVAL = undefined;
+exports.bpfrpt_proptype_Positioner = exports.bpfrpt_proptype_CellMeasurerCache = exports.DEFAULT_SCROLLING_RESET_TIME_INTERVAL = undefined;
 
 var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
+
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -39,19 +43,19 @@ var React = _interopRequireWildcard(_react);
 
 var _reactLifecyclesCompat = require('react-lifecycles-compat');
 
-var _reactLifecyclesCompat2 = _interopRequireDefault(_reactLifecyclesCompat);
-
 var _PositionCache = require('./PositionCache');
 
 var _PositionCache2 = _interopRequireDefault(_PositionCache);
 
 var _requestAnimationTimeout = require('../utils/requestAnimationTimeout');
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var babelPluginFlowReactPropTypes_proptype_AnimationTimeoutId = require('../utils/requestAnimationTimeout').babelPluginFlowReactPropTypes_proptype_AnimationTimeoutId || require('prop-types').any;
 
 var emptyObject = {};
 
@@ -59,6 +63,7 @@ var emptyObject = {};
  * Specifies the number of miliseconds during which to disable pointer events while a scroll is in progress.
  * This improves performance and makes scrolling smoother.
  */
+
 var DEFAULT_SCROLLING_RESET_TIME_INTERVAL = exports.DEFAULT_SCROLLING_RESET_TIME_INTERVAL = 150;
 
 /**
@@ -222,7 +227,8 @@ var Masonry = function (_React$PureComponent) {
           role = _props.role,
           style = _props.style,
           tabIndex = _props.tabIndex,
-          width = _props.width;
+          width = _props.width,
+          rowDirection = _props.rowDirection;
       var _state = this.state,
           isScrolling = _state.isScrolling,
           scrollTop = _state.scrollTop;
@@ -239,6 +245,8 @@ var Masonry = function (_React$PureComponent) {
       var stopIndex = void 0;
 
       this._positionCache.range(Math.max(0, scrollTop - overscanByPixels), height + overscanByPixels * 2, function (index, left, top) {
+        var _style;
+
         if (typeof stopIndex === 'undefined') {
           startIndex = index;
           stopIndex = index;
@@ -252,13 +260,9 @@ var Masonry = function (_React$PureComponent) {
           isScrolling: isScrolling,
           key: keyMapper(index),
           parent: _this2,
-          style: {
-            height: cellMeasurerCache.getHeight(index),
-            left: left,
-            position: 'absolute',
-            top: top,
-            width: cellMeasurerCache.getWidth(index)
-          }
+          style: (_style = {
+            height: cellMeasurerCache.getHeight(index)
+          }, (0, _defineProperty3.default)(_style, rowDirection === 'ltr' ? 'left' : 'right', left), (0, _defineProperty3.default)(_style, 'position', 'absolute'), (0, _defineProperty3.default)(_style, 'top', top), (0, _defineProperty3.default)(_style, 'width', cellMeasurerCache.getWidth(index)), _style)
         }));
       });
 
@@ -439,30 +443,44 @@ Masonry.defaultProps = {
   role: 'grid',
   scrollingResetTimeInterval: DEFAULT_SCROLLING_RESET_TIME_INTERVAL,
   style: emptyObject,
-  tabIndex: 0
+  tabIndex: 0,
+  rowDirection: 'ltr'
 };
 Masonry.propTypes = process.env.NODE_ENV === 'production' ? null : {
-  autoHeight: require('prop-types').bool.isRequired,
-  cellCount: require('prop-types').number.isRequired,
-  cellMeasurerCache: typeof CellMeasurerCache === 'function' ? require('prop-types').instanceOf(CellMeasurerCache).isRequired : require('prop-types').any.isRequired,
-  cellPositioner: typeof Positioner === 'function' ? require('prop-types').instanceOf(Positioner).isRequired : require('prop-types').any.isRequired,
-  cellRenderer: typeof CellRenderer === 'function' ? require('prop-types').instanceOf(CellRenderer).isRequired : require('prop-types').any.isRequired,
-  className: require('prop-types').string,
-  height: require('prop-types').number.isRequired,
-  id: require('prop-types').string,
-  keyMapper: typeof KeyMapper === 'function' ? require('prop-types').instanceOf(KeyMapper).isRequired : require('prop-types').any.isRequired,
-  onCellsRendered: typeof OnCellsRenderedCallback === 'function' ? require('prop-types').instanceOf(OnCellsRenderedCallback) : require('prop-types').any,
-  onScroll: typeof OnScrollCallback === 'function' ? require('prop-types').instanceOf(OnScrollCallback) : require('prop-types').any,
-  overscanByPixels: require('prop-types').number.isRequired,
-  role: require('prop-types').string.isRequired,
-  scrollingResetTimeInterval: require('prop-types').number.isRequired,
+  autoHeight: _propTypes2.default.bool.isRequired,
+  cellCount: _propTypes2.default.number.isRequired,
+  cellMeasurerCache: function cellMeasurerCache() {
+    return (typeof CellMeasurerCache === 'function' ? _propTypes2.default.instanceOf(CellMeasurerCache).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  },
+  cellPositioner: function cellPositioner() {
+    return (typeof Positioner === 'function' ? _propTypes2.default.instanceOf(Positioner).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  },
+  cellRenderer: function cellRenderer() {
+    return (typeof CellRenderer === 'function' ? _propTypes2.default.instanceOf(CellRenderer).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  },
+  className: _propTypes2.default.string,
+  height: _propTypes2.default.number.isRequired,
+  id: _propTypes2.default.string,
+  keyMapper: function keyMapper() {
+    return (typeof KeyMapper === 'function' ? _propTypes2.default.instanceOf(KeyMapper).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  },
+  onCellsRendered: function onCellsRendered() {
+    return (typeof OnCellsRenderedCallback === 'function' ? _propTypes2.default.instanceOf(OnCellsRenderedCallback) : _propTypes2.default.any).apply(this, arguments);
+  },
+  onScroll: function onScroll() {
+    return (typeof OnScrollCallback === 'function' ? _propTypes2.default.instanceOf(OnScrollCallback) : _propTypes2.default.any).apply(this, arguments);
+  },
+  overscanByPixels: _propTypes2.default.number.isRequired,
+  role: _propTypes2.default.string.isRequired,
+  scrollingResetTimeInterval: _propTypes2.default.number.isRequired,
   style: function style(props, propName, componentName) {
     if (!Object.prototype.hasOwnProperty.call(props, propName)) {
       throw new Error('Prop `' + propName + '` has type \'any\' or \'mixed\', but was not provided to `' + componentName + '`. Pass undefined or any other value.');
     }
   },
-  tabIndex: require('prop-types').number.isRequired,
-  width: require('prop-types').number.isRequired
+  tabIndex: _propTypes2.default.number.isRequired,
+  width: _propTypes2.default.number.isRequired,
+  rowDirection: _propTypes2.default.string.isRequired
 };
 
 
@@ -472,23 +490,17 @@ function identity(value) {
 
 function noop() {}
 
-var babelPluginFlowReactPropTypes_proptype_CellMeasurerCache = process.env.NODE_ENV === 'production' ? null : {
-  defaultHeight: require('prop-types').number.isRequired,
-  defaultWidth: require('prop-types').number.isRequired,
-  getHeight: require('prop-types').func.isRequired,
-  getWidth: require('prop-types').func.isRequired
+var bpfrpt_proptype_CellMeasurerCache = process.env.NODE_ENV === 'production' ? null : {
+  defaultHeight: _propTypes2.default.number.isRequired,
+  defaultWidth: _propTypes2.default.number.isRequired,
+  getHeight: _propTypes2.default.func.isRequired,
+  getWidth: _propTypes2.default.func.isRequired
 };
-if (!(process.env.NODE_ENV === 'production') && typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellMeasurerCache', {
-  value: babelPluginFlowReactPropTypes_proptype_CellMeasurerCache,
-  configurable: true
-});
 
 
-(0, _reactLifecyclesCompat2.default)(Masonry);
+(0, _reactLifecyclesCompat.polyfill)(Masonry);
 
 exports.default = Masonry;
-var babelPluginFlowReactPropTypes_proptype_Positioner = process.env.NODE_ENV === 'production' ? null : require('prop-types').func;
-if (!(process.env.NODE_ENV === 'production') && typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Positioner', {
-  value: babelPluginFlowReactPropTypes_proptype_Positioner,
-  configurable: true
-});
+var bpfrpt_proptype_Positioner = process.env.NODE_ENV === 'production' ? null : _propTypes2.default.func;
+exports.bpfrpt_proptype_CellMeasurerCache = bpfrpt_proptype_CellMeasurerCache;
+exports.bpfrpt_proptype_Positioner = bpfrpt_proptype_Positioner;

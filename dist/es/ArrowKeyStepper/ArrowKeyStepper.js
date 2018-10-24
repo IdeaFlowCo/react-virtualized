@@ -3,13 +3,8 @@ import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
 import _createClass from 'babel-runtime/helpers/createClass';
 import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
 import _inherits from 'babel-runtime/helpers/inherits';
-
-var babelPluginFlowReactPropTypes_proptype_RenderedSection = require('../Grid').babelPluginFlowReactPropTypes_proptype_RenderedSection || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_ScrollIndices = require('./types').babelPluginFlowReactPropTypes_proptype_ScrollIndices || require('prop-types').any;
-
 import * as React from 'react';
-import polyfill from 'react-lifecycles-compat';
+import { polyfill } from 'react-lifecycles-compat';
 
 /**
  * This HOC decorates a virtualized component and responds to arrow-key events by scrolling one row or column at a time.
@@ -173,19 +168,22 @@ ArrowKeyStepper.defaultProps = {
   scrollToRow: 0
 };
 ArrowKeyStepper.propTypes = process.env.NODE_ENV === 'production' ? null : {
-  children: require('prop-types').func.isRequired,
-  className: require('prop-types').string,
-  columnCount: require('prop-types').number.isRequired,
-  disabled: require('prop-types').bool.isRequired,
-  isControlled: require('prop-types').bool.isRequired,
-  mode: require('prop-types').oneOf(['cells', 'edges']).isRequired,
-  onScrollToChange: require('prop-types').func,
-  rowCount: require('prop-types').number.isRequired,
-  scrollToColumn: require('prop-types').number.isRequired,
-  scrollToRow: require('prop-types').number.isRequired
+  children: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  columnCount: PropTypes.number.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  isControlled: PropTypes.bool.isRequired,
+  mode: PropTypes.oneOf(['cells', 'edges']).isRequired,
+  onScrollToChange: PropTypes.func,
+  rowCount: PropTypes.number.isRequired,
+  scrollToColumn: PropTypes.number.isRequired,
+  scrollToRow: PropTypes.number.isRequired
 };
 
 
 polyfill(ArrowKeyStepper);
 
 export default ArrowKeyStepper;
+import { bpfrpt_proptype_RenderedSection } from '../Grid';
+import { bpfrpt_proptype_ScrollIndices } from './types';
+import PropTypes from 'prop-types';

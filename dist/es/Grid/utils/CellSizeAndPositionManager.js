@@ -1,12 +1,6 @@
 import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
 import _createClass from 'babel-runtime/helpers/createClass';
 
-var babelPluginFlowReactPropTypes_proptype_VisibleCellRange = require('../types').babelPluginFlowReactPropTypes_proptype_VisibleCellRange || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_CellSizeGetter = require('../types').babelPluginFlowReactPropTypes_proptype_CellSizeGetter || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_Alignment = require('../types').babelPluginFlowReactPropTypes_proptype_Alignment || require('prop-types').any;
-
 /**
  * Just-in-time calculates and caches size and position information for a collection of cells.
  */
@@ -45,10 +39,12 @@ var CellSizeAndPositionManager = function () {
     key: 'configure',
     value: function configure(_ref2) {
       var cellCount = _ref2.cellCount,
-          estimatedCellSize = _ref2.estimatedCellSize;
+          estimatedCellSize = _ref2.estimatedCellSize,
+          cellSizeGetter = _ref2.cellSizeGetter;
 
       this._cellCount = cellCount;
       this._estimatedCellSize = estimatedCellSize;
+      this._cellSizeGetter = cellSizeGetter;
     }
   }, {
     key: 'getCellCount',
@@ -307,3 +303,6 @@ var CellSizeAndPositionManager = function () {
 }();
 
 export default CellSizeAndPositionManager;
+import { bpfrpt_proptype_Alignment } from '../types';
+import { bpfrpt_proptype_CellSizeGetter } from '../types';
+import { bpfrpt_proptype_VisibleCellRange } from '../types';

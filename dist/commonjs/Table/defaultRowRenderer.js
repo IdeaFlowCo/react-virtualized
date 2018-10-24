@@ -14,6 +14,12 @@ var _react = require('react');
 
 var React = _interopRequireWildcard(_react);
 
+var _types = require('./types');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -21,8 +27,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * Default row renderer for Table.
  */
-var babelPluginFlowReactPropTypes_proptype_RowRendererParams = require('./types').babelPluginFlowReactPropTypes_proptype_RowRendererParams || require('prop-types').any;
-
 function defaultRowRenderer(_ref) {
   var className = _ref.className,
       columns = _ref.columns,
@@ -36,7 +40,7 @@ function defaultRowRenderer(_ref) {
       rowData = _ref.rowData,
       style = _ref.style;
 
-  var a11yProps = {};
+  var a11yProps = { 'aria-rowindex': index + 1 };
 
   if (onRowClick || onRowDoubleClick || onRowMouseOut || onRowMouseOver || onRowRightClick) {
     a11yProps['aria-label'] = 'row';
@@ -79,4 +83,4 @@ function defaultRowRenderer(_ref) {
     columns
   );
 }
-defaultRowRenderer.propTypes = process.env.NODE_ENV === 'production' ? null : babelPluginFlowReactPropTypes_proptype_RowRendererParams === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_RowRendererParams;
+defaultRowRenderer.propTypes = process.env.NODE_ENV === 'production' ? null : _types.bpfrpt_proptype_RowRendererParams === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_RowRendererParams;

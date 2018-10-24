@@ -22,13 +22,9 @@ var _CellSizeAndPositionManager2 = _interopRequireDefault(_CellSizeAndPositionMa
 
 var _maxElementSize = require('./maxElementSize.js');
 
+var _types = require('../types');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var babelPluginFlowReactPropTypes_proptype_VisibleCellRange = require('../types').babelPluginFlowReactPropTypes_proptype_VisibleCellRange || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_CellSizeGetter = require('../types').babelPluginFlowReactPropTypes_proptype_CellSizeGetter || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_Alignment = require('../types').babelPluginFlowReactPropTypes_proptype_Alignment || require('prop-types').any;
 
 /**
  * Extends CellSizeAndPositionManager and adds scaling behavior for lists that are too large to fit within a browser's native limits.

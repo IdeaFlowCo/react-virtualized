@@ -30,9 +30,11 @@ var React = _interopRequireWildcard(_react);
 
 var _reactDom = require('react-dom');
 
-var _CellMeasurerCache = require('./CellMeasurerCache.js');
+var _types = require('./types');
 
-var _CellMeasurerCache2 = _interopRequireDefault(_CellMeasurerCache);
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -184,15 +186,17 @@ var CellMeasurer = function (_React$PureComponent) {
 
 CellMeasurer.__internalCellMeasurerFlag = false;
 CellMeasurer.propTypes = process.env.NODE_ENV === 'production' ? null : {
-  cache: typeof _CellMeasurerCache2.default === 'function' ? require('prop-types').instanceOf(_CellMeasurerCache2.default).isRequired : require('prop-types').any.isRequired,
-  children: require('prop-types').oneOfType([require('prop-types').func, require('prop-types').node]).isRequired,
-  columnIndex: require('prop-types').number,
-  index: require('prop-types').number,
-  parent: require('prop-types').shape({
-    invalidateCellSizeAfterRender: require('prop-types').func,
-    recomputeGridSize: require('prop-types').func
+  cache: function cache() {
+    return (typeof _types.bpfrpt_proptype_CellMeasureCache === 'function' ? _types.bpfrpt_proptype_CellMeasureCache.isRequired ? _types.bpfrpt_proptype_CellMeasureCache.isRequired : _types.bpfrpt_proptype_CellMeasureCache : _propTypes2.default.shape(_types.bpfrpt_proptype_CellMeasureCache).isRequired).apply(this, arguments);
+  },
+  children: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.node]).isRequired,
+  columnIndex: _propTypes2.default.number,
+  index: _propTypes2.default.number,
+  parent: _propTypes2.default.shape({
+    invalidateCellSizeAfterRender: _propTypes2.default.func,
+    recomputeGridSize: _propTypes2.default.func
   }).isRequired,
-  rowIndex: require('prop-types').number
+  rowIndex: _propTypes2.default.number
 };
 exports.default = CellMeasurer;
 if (process.env.NODE_ENV !== 'production') {

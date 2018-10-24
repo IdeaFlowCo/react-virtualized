@@ -13,6 +13,12 @@ var _SortIndicator = require('./SortIndicator');
 
 var _SortIndicator2 = _interopRequireDefault(_SortIndicator);
 
+var _types = require('./types');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -20,8 +26,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 /**
  * Default table header renderer.
  */
-var babelPluginFlowReactPropTypes_proptype_HeaderRendererParams = require('./types').babelPluginFlowReactPropTypes_proptype_HeaderRendererParams || require('prop-types').any;
-
 function defaultHeaderRenderer(_ref) {
   var dataKey = _ref.dataKey,
       label = _ref.label,
@@ -44,4 +48,4 @@ function defaultHeaderRenderer(_ref) {
 
   return children;
 }
-defaultHeaderRenderer.propTypes = process.env.NODE_ENV === 'production' ? null : babelPluginFlowReactPropTypes_proptype_HeaderRendererParams === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_HeaderRendererParams;
+defaultHeaderRenderer.propTypes = process.env.NODE_ENV === 'production' ? null : _types.bpfrpt_proptype_HeaderRendererParams === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_HeaderRendererParams;

@@ -1,6 +1,5 @@
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../../utils/requestAnimationTimeout';
 
-var babelPluginFlowReactPropTypes_proptype_WindowScroller = require('../WindowScroller.js').babelPluginFlowReactPropTypes_proptype_WindowScroller || require('prop-types').any;
 
 var mountedInstances = [];
 var originalBodyPointerEvents = null;
@@ -73,3 +72,4 @@ export function unregisterScrollListener(component, element) {
     }
   }
 }
+import { bpfrpt_proptype_WindowScroller } from '../WindowScroller.js';

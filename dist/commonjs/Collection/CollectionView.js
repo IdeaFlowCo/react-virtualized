@@ -42,8 +42,6 @@ var React = _interopRequireWildcard(_react);
 
 var _reactLifecyclesCompat = require('react-lifecycles-compat');
 
-var _reactLifecyclesCompat2 = _interopRequireDefault(_reactLifecyclesCompat);
-
 var _createCallbackMemoizer = require('../utils/createCallbackMemoizer');
 
 var _createCallbackMemoizer2 = _interopRequireDefault(_createCallbackMemoizer);
@@ -657,6 +655,6 @@ CollectionView.propTypes = process.env.NODE_ENV !== "production" ? {
 } : {};
 
 
-(0, _reactLifecyclesCompat2.default)(CollectionView);
+(0, _reactLifecyclesCompat.polyfill)(CollectionView);
 
 exports.default = CollectionView;

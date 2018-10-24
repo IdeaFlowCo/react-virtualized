@@ -8,9 +8,10 @@ exports.unregisterScrollListener = unregisterScrollListener;
 
 var _requestAnimationTimeout = require('../../utils/requestAnimationTimeout');
 
-var babelPluginFlowReactPropTypes_proptype_WindowScroller = require('../WindowScroller.js').babelPluginFlowReactPropTypes_proptype_WindowScroller || require('prop-types').any;
+var _WindowScroller = require('../WindowScroller.js');
 
 var mountedInstances = [];
+
 var originalBodyPointerEvents = null;
 var disablePointerEventsTimeoutId = null;
 

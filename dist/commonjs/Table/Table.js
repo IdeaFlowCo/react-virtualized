@@ -66,8 +66,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var babelPluginFlowReactPropTypes_proptype_CellPosition = require('../Grid').babelPluginFlowReactPropTypes_proptype_CellPosition || require('prop-types').any;
-
 /**
  * Table component with fixed headers and virtualized rows for improved performance with large data sets.
  * This component expects explicit width, height, and padding parameters.
@@ -260,6 +258,10 @@ var Table = function (_React$PureComponent) {
       return React.createElement(
         'div',
         {
+          'aria-label': this.props['aria-label'],
+          'aria-labelledby': this.props['aria-labelledby'],
+          'aria-colcount': React.Children.toArray(children).length,
+          'aria-rowcount': this.props.rowCount,
           className: (0, _classnames2.default)('ReactVirtualized__Table', className),
           id: id,
           role: 'grid',
@@ -267,12 +269,12 @@ var Table = function (_React$PureComponent) {
         !disableHeader && headerRowRenderer({
           className: (0, _classnames2.default)('ReactVirtualized__Table__headerRow', rowClass),
           columns: this._getHeaderColumns(),
-          style: (0, _extends3.default)({}, rowStyleObject, {
+          style: (0, _extends3.default)({
             height: headerHeight,
             overflow: 'hidden',
             paddingRight: scrollbarWidth,
             width: width
-          })
+          }, rowStyleObject)
         }),
         React.createElement(_Grid3.default, (0, _extends3.default)({}, this.props, {
           autoContainerWidth: true,
@@ -304,6 +306,7 @@ var Table = function (_React$PureComponent) {
           parent = _ref4.parent,
           rowData = _ref4.rowData,
           rowIndex = _ref4.rowIndex;
+      var onColumnClick = this.props.onColumnClick;
       var _column$props = column.props,
           cellDataGetter = _column$props.cellDataGetter,
           cellRenderer = _column$props.cellRenderer,
@@ -325,6 +328,10 @@ var Table = function (_React$PureComponent) {
         rowIndex: rowIndex
       });
 
+      var onClick = function onClick(event) {
+        onColumnClick && onColumnClick({ columnData: columnData, dataKey: dataKey, event: event });
+      };
+
       var style = this._cachedColumnStyles[columnIndex];
 
       var title = typeof renderedCell === 'string' ? renderedCell : null;
@@ -335,9 +342,11 @@ var Table = function (_React$PureComponent) {
       return React.createElement(
         'div',
         {
+          'aria-colindex': columnIndex + 1,
           'aria-describedby': id,
           className: (0, _classnames2.default)('ReactVirtualized__Table__rowColumn', className),
           key: 'Row' + rowIndex + '-' + 'Col' + columnIndex,
+          onClick: onClick,
           role: 'gridcell',
           style: style,
           title: title },
@@ -412,6 +421,7 @@ var Table = function (_React$PureComponent) {
         };
 
         headerAriaLabel = column.props['aria-label'] || label || dataKey;
+        headerAriaSort = 'none';
         headerTabIndex = 0;
         headerOnClick = onClick;
         headerOnKeyDown = onKeyDown;
@@ -481,11 +491,11 @@ var Table = function (_React$PureComponent) {
       });
 
       var className = (0, _classnames2.default)('ReactVirtualized__Table__row', rowClass);
-      var flattenedStyle = (0, _extends3.default)({}, style, rowStyleObject, {
+      var flattenedStyle = (0, _extends3.default)({}, style, {
         height: this._getRowHeight(index),
         overflow: 'hidden',
         paddingRight: scrollbarWidth
-      });
+      }, rowStyleObject);
 
       return rowRenderer({
         className: className,
@@ -627,7 +637,11 @@ Table.defaultProps = {
 };
 exports.default = Table;
 Table.propTypes = process.env.NODE_ENV !== "production" ? {
+  /** This is just set on the grid top element. */
   'aria-label': _propTypes2.default.string,
+
+  /** This is just set on the grid top element. */
+  'aria-labelledby': _propTypes2.default.string,
 
   /**
    * Removes fixed height from the scrollingContainer so that the total height
@@ -691,6 +705,12 @@ Table.propTypes = process.env.NODE_ENV !== "production" ? {
 
   /** Optional renderer to be used in place of table body rows when rowCount is 0 */
   noRowsRenderer: _propTypes2.default.func,
+
+  /**
+   * Optional callback when a column is clicked.
+   * ({ columnData: any, dataKey: string }): void
+   */
+  onColumnClick: _propTypes2.default.func,
 
   /**
    * Optional callback when a column's header is clicked.

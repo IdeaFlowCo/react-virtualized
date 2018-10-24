@@ -45,6 +45,10 @@ var _detectElementResize = require('../vendor/detectElementResize');
 
 var _detectElementResize2 = _interopRequireDefault(_detectElementResize);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -263,31 +267,33 @@ WindowScroller.propTypes = process.env.NODE_ENV === 'production' ? null : {
    * This function should implement the following signature:
    * ({ height, isScrolling, scrollLeft, scrollTop, width }) => PropTypes.element
    */
-  children: require('prop-types').func.isRequired,
+  children: _propTypes2.default.func.isRequired,
 
 
   /** Callback to be invoked on-resize: ({ height, width }) */
-  onResize: require('prop-types').func.isRequired,
+  onResize: _propTypes2.default.func.isRequired,
 
 
   /** Callback to be invoked on-scroll: ({ scrollLeft, scrollTop }) */
-  onScroll: require('prop-types').func.isRequired,
+  onScroll: _propTypes2.default.func.isRequired,
 
 
   /** Element to attach scroll event listeners. Defaults to window. */
-  scrollElement: require('prop-types').oneOfType([require('prop-types').any, typeof Element === 'function' ? require('prop-types').instanceOf(Element) : require('prop-types').any]),
+  scrollElement: _propTypes2.default.oneOfType([_propTypes2.default.any, function () {
+    return (typeof Element === 'function' ? _propTypes2.default.instanceOf(Element) : _propTypes2.default.any).apply(this, arguments);
+  }]),
 
   /**
    * Wait this amount of time after the last scroll event before resetting child `pointer-events`.
    */
-  scrollingResetTimeInterval: require('prop-types').number.isRequired,
+  scrollingResetTimeInterval: _propTypes2.default.number.isRequired,
 
 
   /** Height used for server-side rendering */
-  serverHeight: require('prop-types').number.isRequired,
+  serverHeight: _propTypes2.default.number.isRequired,
 
 
   /** Width used for server-side rendering */
-  serverWidth: require('prop-types').number.isRequired
+  serverWidth: _propTypes2.default.number.isRequired
 };
 exports.default = WindowScroller;

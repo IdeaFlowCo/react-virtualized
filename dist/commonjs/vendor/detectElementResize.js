@@ -65,7 +65,7 @@ function createDetectElementResize(nonce) {
 
     var scrollListener = function scrollListener(e) {
       // Don't measure (which forces) reflow for scrolls that happen inside of children!
-      if (e.target.className.indexOf('contract-trigger') < 0 && e.target.className.indexOf('expand-trigger') < 0) {
+      if (e.target.className && typeof e.target.className.indexOf === 'function' && e.target.className.indexOf('contract-trigger') < 0 && e.target.className.indexOf('expand-trigger') < 0) {
         return;
       }
 

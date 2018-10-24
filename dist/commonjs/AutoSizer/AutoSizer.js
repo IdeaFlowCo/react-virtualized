@@ -36,6 +36,10 @@ var _detectElementResize = require('../vendor/detectElementResize');
 
 var _detectElementResize2 = _interopRequireDefault(_detectElementResize);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -185,38 +189,38 @@ AutoSizer.defaultProps = {
 };
 AutoSizer.propTypes = process.env.NODE_ENV === 'production' ? null : {
   /** Function responsible for rendering children.*/
-  children: require('prop-types').func.isRequired,
+  children: _propTypes2.default.func.isRequired,
 
 
   /** Optional custom CSS class name to attach to root AutoSizer element.  */
-  className: require('prop-types').string,
+  className: _propTypes2.default.string,
 
 
   /** Default height to use for initial render; useful for SSR */
-  defaultHeight: require('prop-types').number,
+  defaultHeight: _propTypes2.default.number,
 
 
   /** Default width to use for initial render; useful for SSR */
-  defaultWidth: require('prop-types').number,
+  defaultWidth: _propTypes2.default.number,
 
 
   /** Disable dynamic :height property */
-  disableHeight: require('prop-types').bool.isRequired,
+  disableHeight: _propTypes2.default.bool.isRequired,
 
 
   /** Disable dynamic :width property */
-  disableWidth: require('prop-types').bool.isRequired,
+  disableWidth: _propTypes2.default.bool.isRequired,
 
 
   /** Nonce of the inlined stylesheet for Content Security Policy */
-  nonce: require('prop-types').string,
+  nonce: _propTypes2.default.string,
 
 
   /** Callback to be invoked on-resize */
-  onResize: require('prop-types').func.isRequired,
+  onResize: _propTypes2.default.func.isRequired,
 
 
   /** Optional inline style */
-  style: require('prop-types').object
+  style: _propTypes2.default.object
 };
 exports.default = AutoSizer;

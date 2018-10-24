@@ -1,12 +1,9 @@
+import _Promise from 'babel-runtime/core-js/promise';
 import { caf, raf } from './animationFrame';
 
-var babelPluginFlowReactPropTypes_proptype_AnimationTimeoutId = process.env.NODE_ENV === 'production' ? null : {
-  id: require('prop-types').number.isRequired
+var bpfrpt_proptype_AnimationTimeoutId = process.env.NODE_ENV === 'production' ? null : {
+  id: PropTypes.number.isRequired
 };
-if (!(process.env.NODE_ENV === 'production') && typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_AnimationTimeoutId', {
-  value: babelPluginFlowReactPropTypes_proptype_AnimationTimeoutId,
-  configurable: true
-});
 
 
 export var cancelAnimationTimeout = function cancelAnimationTimeout(frame) {
@@ -20,7 +17,11 @@ export var cancelAnimationTimeout = function cancelAnimationTimeout(frame) {
  * Credit: Joe Lambert (https://gist.github.com/joelambert/1002116#file-requesttimeout-js)
  */
 export var requestAnimationTimeout = function requestAnimationTimeout(callback, delay) {
-  var start = Date.now();
+  var start = void 0;
+  // wait for end of processing current event handler, because event handler may be long
+  _Promise.resolve().then(function () {
+    start = Date.now();
+  });
 
   var timeout = function timeout() {
     if (Date.now() - start >= delay) {
@@ -36,3 +37,5 @@ export var requestAnimationTimeout = function requestAnimationTimeout(callback, 
 
   return frame;
 };
+import PropTypes from 'prop-types';
+export { bpfrpt_proptype_AnimationTimeoutId };

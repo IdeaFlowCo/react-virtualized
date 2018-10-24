@@ -5,9 +5,9 @@ import _createClass from 'babel-runtime/helpers/createClass';
 import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
 import _inherits from 'babel-runtime/helpers/inherits';
 
-var babelPluginFlowReactPropTypes_proptype_CellPosition = require('../Grid').babelPluginFlowReactPropTypes_proptype_CellPosition || require('prop-types').any;
 
 import cn from 'classnames';
+
 import Column from './Column';
 import PropTypes from 'prop-types';
 import * as React from 'react';
@@ -211,6 +211,10 @@ var Table = function (_React$PureComponent) {
       return React.createElement(
         'div',
         {
+          'aria-label': this.props['aria-label'],
+          'aria-labelledby': this.props['aria-labelledby'],
+          'aria-colcount': React.Children.toArray(children).length,
+          'aria-rowcount': this.props.rowCount,
           className: cn('ReactVirtualized__Table', className),
           id: id,
           role: 'grid',
@@ -218,12 +222,12 @@ var Table = function (_React$PureComponent) {
         !disableHeader && headerRowRenderer({
           className: cn('ReactVirtualized__Table__headerRow', rowClass),
           columns: this._getHeaderColumns(),
-          style: _extends({}, rowStyleObject, {
+          style: _extends({
             height: headerHeight,
             overflow: 'hidden',
             paddingRight: scrollbarWidth,
             width: width
-          })
+          }, rowStyleObject)
         }),
         React.createElement(Grid, _extends({}, this.props, {
           autoContainerWidth: true,
@@ -255,6 +259,7 @@ var Table = function (_React$PureComponent) {
           parent = _ref4.parent,
           rowData = _ref4.rowData,
           rowIndex = _ref4.rowIndex;
+      var onColumnClick = this.props.onColumnClick;
       var _column$props = column.props,
           cellDataGetter = _column$props.cellDataGetter,
           cellRenderer = _column$props.cellRenderer,
@@ -276,6 +281,10 @@ var Table = function (_React$PureComponent) {
         rowIndex: rowIndex
       });
 
+      var onClick = function onClick(event) {
+        onColumnClick && onColumnClick({ columnData: columnData, dataKey: dataKey, event: event });
+      };
+
       var style = this._cachedColumnStyles[columnIndex];
 
       var title = typeof renderedCell === 'string' ? renderedCell : null;
@@ -286,9 +295,11 @@ var Table = function (_React$PureComponent) {
       return React.createElement(
         'div',
         {
+          'aria-colindex': columnIndex + 1,
           'aria-describedby': id,
           className: cn('ReactVirtualized__Table__rowColumn', className),
           key: 'Row' + rowIndex + '-' + 'Col' + columnIndex,
+          onClick: onClick,
           role: 'gridcell',
           style: style,
           title: title },
@@ -363,6 +374,7 @@ var Table = function (_React$PureComponent) {
         };
 
         headerAriaLabel = column.props['aria-label'] || label || dataKey;
+        headerAriaSort = 'none';
         headerTabIndex = 0;
         headerOnClick = onClick;
         headerOnKeyDown = onKeyDown;
@@ -432,11 +444,11 @@ var Table = function (_React$PureComponent) {
       });
 
       var className = cn('ReactVirtualized__Table__row', rowClass);
-      var flattenedStyle = _extends({}, style, rowStyleObject, {
+      var flattenedStyle = _extends({}, style, {
         height: this._getRowHeight(index),
         overflow: 'hidden',
         paddingRight: scrollbarWidth
-      });
+      }, rowStyleObject);
 
       return rowRenderer({
         className: className,
@@ -579,7 +591,11 @@ Table.defaultProps = {
 };
 export default Table;
 Table.propTypes = process.env.NODE_ENV !== "production" ? {
+  /** This is just set on the grid top element. */
   'aria-label': PropTypes.string,
+
+  /** This is just set on the grid top element. */
+  'aria-labelledby': PropTypes.string,
 
   /**
    * Removes fixed height from the scrollingContainer so that the total height
@@ -643,6 +659,12 @@ Table.propTypes = process.env.NODE_ENV !== "production" ? {
 
   /** Optional renderer to be used in place of table body rows when rowCount is 0 */
   noRowsRenderer: PropTypes.func,
+
+  /**
+   * Optional callback when a column is clicked.
+   * ({ columnData: any, dataKey: string }): void
+   */
+  onColumnClick: PropTypes.func,
 
   /**
    * Optional callback when a column's header is clicked.
@@ -779,3 +801,4 @@ Table.propTypes = process.env.NODE_ENV !== "production" ? {
   /** Width of list */
   width: PropTypes.number.isRequired
 } : {};
+import { bpfrpt_proptype_CellPosition } from '../Grid';
